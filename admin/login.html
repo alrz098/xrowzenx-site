@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+<link rel="stylesheet" href="../style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</head>
+<body class="theme-dark">
+
+<canvas id="snow"></canvas>
+<canvas id="gifts"></canvas>
+
+<div class="main-card" style="max-width:1000px;">
+  <h1>Admin Dashboard</h1>
+  <div style="display:flex;gap:20px;">
+    <button onclick="loadData('game_clicks')">Game Visits</button>
+    <button onclick="loadData('social_clicks')">Social Visits</button>
+  </div>
+  <div id="dataArea" style="margin-top:20px;"></div>
+</div>
+
+<script>
+const SUPABASE_URL = "YOUR_SUPABASE_URL";
+const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+const supabase = supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+
+async function loadData(table){
+  let {data,error} = await supabase.from(table).select().order('timestamp',{ascending:false}).limit(100);
+  if(error){document.getElementById("dataArea").innerText="Error fetching data"; return;}
+  let html = "<table style='width:100%;color:white;'><tr><th>Item</th><th>Timestamp</th></tr>";
+  data.forEach(d=>{
+    let item = table==='game_clicks'?d.game_name:d.platform;
+    html += `<tr><td>${item}</td><td>${new Date(d.timestamp).toLocaleString()}</td></tr>`;
+  });
+  html += "</table>";
+  document.getElementById("dataArea").innerHTML = html;
+}
+</script>
+
+</body>
+</html>

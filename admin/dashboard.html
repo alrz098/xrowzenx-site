@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Dashboard</title>
+<link rel="stylesheet" href="../style.css">
+</head>
+<body>
+
+<canvas id="snow"></canvas>
+<canvas id="gifts"></canvas>
+
+<div class="main-card">
+  <h1>Admin Dashboard</h1>
+  <div>
+    <h2>Game Visits</h2>
+    <ul id="gameStats">
+      <!-- JavaScript ile doldurulacak -->
+    </ul>
+  </div>
+  <div>
+    <h2>Social Media Visits</h2>
+    <ul id="socialStats">
+      <!-- JavaScript ile doldurulacak -->
+    </ul>
+  </div>
+</div>
+
+<script src="../script.js"></script>
+<script>
+  // Örnek veri (sonradan Supabase ile değiştirilecek)
+  const gameStats = [
+    {name: "PS99", clicks: 120},
+    {name: "RIVALS", clicks: 95}
+  ];
+  const socialStats = [
+    {name: "YouTube", clicks: 40},
+    {name: "Discord", clicks: 25}
+  ];
+
+  const gameList = document.getElementById("gameStats");
+  gameStats.forEach(g => {
+    const li = document.createElement("li");
+    li.innerText = `${g.name}: ${g.clicks} visits`;
+    gameList.appendChild(li);
+  });
+
+  const socialList = document.getElementById("socialStats");
+  socialStats.forEach(s => {
+    const li = document.createElement("li");
+    li.innerText = `${s.name}: ${s.clicks} visits`;
+    socialList.appendChild(li);
+  });
+</script>
+
+</body>
+</html>

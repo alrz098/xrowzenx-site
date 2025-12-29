@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Admin Login</title>
+<link rel="stylesheet" href="../style.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</head>
+<body class="theme-dark">
+
+<canvas id="snow"></canvas>
+<canvas id="gifts"></canvas>
+
+<div class="main-card" style="max-width:400px;">
+  <h1>Admin Login</h1>
+  <input type="password" id="adminPass" placeholder="Enter password" style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--accent);outline:none;font-size:16px;">
+  <button id="enterBtn" style="margin-top:12px;padding:10px 20px;border-radius:12px;border:none;background:var(--accent);color:#fff;cursor:pointer;">Enter</button>
+  <div id="loginMsg" style="margin-top:12px;color:red;"></div>
+</div>
+
+<script>
+const SUPABASE_URL = "YOUR_SUPABASE_URL";
+const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+const supabase = supabase.createClient(SUPABASE_URL,SUPABASE_ANON_KEY);
+
+document.getElementById("enterBtn").addEventListener("click", async ()=>{
+  const pass = document.getElementById("adminPass").value;
+  // Check hashed password in Supabase
+  const {data,error} = await supabase.from('admin_users').select().eq('password_hash',pass); // hash yerine düz text demo
+  if(data.length>0){window.location.href="dashboard.html";}
+  else{document.getElementById("loginMsg").innerText="Wrong password";}
+});
+
+document.getElementById("adminPass").addEventListener("keyup",e=>{if(e.key==="Enter") document.getElementById("enterBtn").click();});
+</script>
+
+</body>
+</html>

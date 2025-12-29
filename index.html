@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Game Rewards</title>
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
+</head>
+<body>
+
+<audio id="bgMusic" loop>
+  <source src="music/christmas.mp3" type="audio/mpeg">
+</audio>
+
+<div id="musicOverlay"><span>Click to enter</span></div>
+
+<a href="/admin/login.html" class="admin-login">Admin Login</a>
+
+<div class="theme-switch">
+  <button onclick="setTheme('light')">Light</button>
+  <button onclick="setTheme('blue')">Blue</button>
+  <button onclick="setTheme('dark')">Dark</button>
+</div>
+
+<div class="social-box">
+  <a href="https://www.youtube.com/@suscribete_dalelike938" target="_blank" onclick="trackSocial('youtube')"><i class="fa-brands fa-youtube"></i></a>
+  <a href="https://discord.gg/JSDhjEYx" target="_blank" onclick="trackSocial('discord')"><i class="fa-brands fa-discord"></i></a>
+  <a href="https://www.instagram.com/iivan.0007/" target="_blank" onclick="trackSocial('instagram')"><i class="fa-brands fa-instagram"></i></a>
+</div>
+
+<img class="santa-hat" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Santa_hat.svg/512px-Santa_hat.svg.png" alt="Santa Hat">
+
+<div class="main-card">
+  <h1>Click here for rewards free in games Roblox</h1>
+
+  <div class="game" onclick="startVerify(this,'PS99')">
+    <img src="https://tr.rbxcdn.com/180DAY-7ba01bc168c1d1f4fb06be2f1f2910d1/512/512/Image/Webp/noFilter">
+    <span>PS99</span>
+    <div class="status"></div>
+  </div>
+
+  <div class="game" onclick="startVerify(this,'RIVALS')">
+    <img src="https://tr.rbxcdn.com/180DAY-7c296abab99af2df457d093f669eff0e/768/432/Image/Webp/noFilter">
+    <span>RIVALS</span>
+    <div class="status"></div>
+  </div>
+
+  <div class="game" onclick="startVerify(this,'ADOPT ME')">
+    <img src="https://tr.rbxcdn.com/180DAY-e2d96a2feb46542ea90a5ad03e91b2c4/512/512/Image/Webp/noFilter">
+    <span>ADOPT ME</span>
+    <div class="status"></div>
+  </div>
+
+  <div class="game" onclick="startVerify(this,'STEAL A BRAINROT')">
+    <img src="https://tr.rbxcdn.com/180DAY-e954f84423236c29308c9f3b1dd88d0b/512/512/Image/Webp/noFilter">
+    <span>STEAL A BRAINROT</span>
+    <div class="status"></div>
+  </div>
+</div>
+
+<div id="verify"><div class="box">Verifying…</div></div>
+<div id="muteBtn"><i class="fa-solid fa-volume-high"></i></div>
+
+<canvas id="snow"></canvas>
+<canvas id="gifts"></canvas>
+
+<script src="script.js"></script>
+<script>
+// SUPABASE CONFIG
+const SUPABASE_URL = "YOUR_SUPABASE_URL";
+const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
+const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+// TRACK VISIT
+async function trackVisit(){
+  await supabase.from('visits').insert([{timestamp: new Date()}]);
+}
+trackVisit();
+
+// TRACK SOCIAL
+async function trackSocial(platform){
+  await supabase.from('social_clicks').insert([{platform, timestamp: new Date()}]);
+}
+
+// TRACK GAME
+async function trackGame(game){
+  await supabase.from('game_clicks').insert([{game_name: game, timestamp: new Date()}]);
+}
+
+// VERIFY FUNCTION
+function startVerify(el, game){
+  if(el.classList.contains("done")) return;
+  document.getElementById("verify").style.display="flex";
+  setTimeout(()=>{
+    document.getElementById("verify").style.display="none";
+    el.classList.add("done");
+    el.querySelector(".status").innerHTML="Reward unlocked <i class='fa-solid fa-check'></i>";
+    trackGame(game);
+  },1200);
+}
+</script>
+
+</body>
+</html>
