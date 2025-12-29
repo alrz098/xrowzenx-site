@@ -8,40 +8,27 @@
 </head>
 <body class="theme-dark">
 
-<canvas id="snow"></canvas>
-<canvas id="gifts"></canvas>
-
-<div class="main-card" style="max-width:400px;">
+<div class="main-card" style="max-width:400px;margin:120px auto;">
   <h1>Admin Login</h1>
-  <input type="text" id="adminUser" placeholder="Enter username" style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--accent);outline:none;font-size:16px;margin-bottom:12px;">
-  <input type="password" id="adminPass" placeholder="Enter password" style="width:100%;padding:12px;border-radius:12px;border:1px solid var(--accent);outline:none;font-size:16px;">
-  <button id="enterBtn" style="margin-top:12px;padding:10px 20px;border-radius:12px;border:none;background:var(--accent);color:#fff;cursor:pointer;">Enter</button>
-  <div id="loginMsg" style="margin-top:12px;color:red;"></div>
+  <input type="text" id="username" placeholder="Username" style="width:100%;padding:12px;border-radius:12px;margin-bottom:10px;">
+  <input type="password" id="password" placeholder="Password" style="width:100%;padding:12px;border-radius:12px;margin-bottom:10px;">
+  <button id="loginBtn" style="width:100%;padding:12px;border-radius:12px;background:var(--accent);color:white;">Enter</button>
+  <div id="loginMsg" style="margin-top:10px;color:red;"></div>
 </div>
 
-<script src="../script.js"></script>
 <script>
-const ADMIN_USER = "Admin1029";
-const ADMIN_PASS = "Shayan1385";
+const correctUser = "Admin1029";
+const correctPass = "Shayan1385";
 
-const enterBtn = document.getElementById("enterBtn");
-enterBtn.addEventListener("click", ()=> {
-    const username = document.getElementById("adminUser").value;
-    const password = document.getElementById("adminPass").value;
-    if(username === ADMIN_USER && password === ADMIN_PASS){
-        window.location.href = "dashboard.html";
-    } else {
-        document.getElementById("loginMsg").innerText = "Wrong username or password";
-    }
-});
-
-document.getElementById("adminPass").addEventListener("keyup", e=>{
-    if(e.key === "Enter") enterBtn.click();
-});
-document.getElementById("adminUser").addEventListener("keyup", e=>{
-    if(e.key === "Enter") enterBtn.click();
+document.getElementById("loginBtn").addEventListener("click",()=>{
+  const u = document.getElementById("username").value;
+  const p = document.getElementById("password").value;
+  if(u === correctUser && p === correctPass){
+    window.location.href="dashboard.html";
+  }else{
+    document.getElementById("loginMsg").innerText="Wrong username or password";
+  }
 });
 </script>
-
 </body>
 </html>
