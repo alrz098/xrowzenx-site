@@ -6,52 +6,47 @@
 <title>Admin Dashboard</title>
 <link rel="stylesheet" href="../style.css">
 </head>
-<body>
+<body class="theme-dark">
 
 <canvas id="snow"></canvas>
 <canvas id="gifts"></canvas>
 
-<div class="main-card">
+<div class="main-card" style="max-width:1000px;">
   <h1>Admin Dashboard</h1>
-  <div>
-    <h2>Game Visits</h2>
-    <ul id="gameStats">
-      <!-- JavaScript ile doldurulacak -->
-    </ul>
+  <div style="display:flex;gap:20px;margin-bottom:20px;">
+    <button onclick="loadData('game')">Game Visits</button>
+    <button onclick="loadData('social')">Social Visits</button>
   </div>
-  <div>
-    <h2>Social Media Visits</h2>
-    <ul id="socialStats">
-      <!-- JavaScript ile doldurulacak -->
-    </ul>
-  </div>
+  <div id="dataArea" style="margin-top:20px;color:white;"></div>
 </div>
 
 <script src="../script.js"></script>
 <script>
-  // Örnek veri (sonradan Supabase ile değiştirilecek)
-  const gameStats = [
-    {name: "PS99", clicks: 120},
-    {name: "RIVALS", clicks: 95}
-  ];
-  const socialStats = [
-    {name: "YouTube", clicks: 40},
-    {name: "Discord", clicks: 25}
-  ];
+const sampleData = {
+    game:[
+        {name:"PS99", clicks:120},
+        {name:"RIVALS", clicks:95},
+        {name:"ADOPT ME", clicks:150},
+        {name:"STEAL A BRAINROT", clicks:80},
+        {name:"MURDER MYSTERY 2", clicks:60}
+    ],
+    social:[
+        {name:"YouTube", clicks:40},
+        {name:"Discord", clicks:25},
+        {name:"Instagram", clicks:30}
+    ]
+};
 
-  const gameList = document.getElementById("gameStats");
-  gameStats.forEach(g => {
-    const li = document.createElement("li");
-    li.innerText = `${g.name}: ${g.clicks} visits`;
-    gameList.appendChild(li);
-  });
-
-  const socialList = document.getElementById("socialStats");
-  socialStats.forEach(s => {
-    const li = document.createElement("li");
-    li.innerText = `${s.name}: ${s.clicks} visits`;
-    socialList.appendChild(li);
-  });
+function loadData(type){
+    const area = document.getElementById("dataArea");
+    const data = sampleData[type];
+    let html = "<table style='width:100%;color:white;border-collapse:collapse'><tr><th style='border-bottom:1px solid white'>Item</th><th style='border-bottom:1px solid white'>Clicks</th></tr>";
+    data.forEach(d=>{
+        html += `<tr><td style='padding:6px 0'>${d.name}</td><td style='padding:6px 0'>${d.clicks}</td></tr>`;
+    });
+    html += "</table>";
+    area.innerHTML = html;
+}
 </script>
 
 </body>
