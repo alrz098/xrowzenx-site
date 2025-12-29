@@ -3,74 +3,63 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Game Rewards</title>
+<title>XrowzenX Game Rewards</title>
 <link rel="stylesheet" href="style.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
-<body>
+<body class="theme-dark">
 
+<!-- Müzik ve overlay -->
 <audio id="bgMusic" loop>
   <source src="music/christmas.mp3" type="audio/mpeg">
 </audio>
+<div id="musicOverlay"><span>Click to enter</span></div>
+<input type="range" id="volumeSlider" min="0" max="100" value="75">
 
-<div id="muteBtn"><i class="fa-solid fa-volume-high"></i></div>
-
-<div class="theme-switch">
-  <button onclick="setTheme('light')">Light</button>
-  <button onclick="setTheme('blue')">Blue</button>
-  <button onclick="setTheme('dark')">Dark</button>
+<!-- Social Media -->
+<div class="social-box">
+  <a href="https://www.youtube.com/@suscribete_dalelike938" target="_blank"><i class="fa-brands fa-youtube"></i></a>
+  <a href="https://discord.gg/kChMwB5s" target="_blank"><i class="fa-brands fa-discord"></i></a>
+  <a href="https://www.instagram.com/iivan.0007/" target="_blank"><i class="fa-brands fa-instagram"></i></a>
 </div>
 
+<!-- Santa Hat -->
 <img class="santa-hat" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/Santa_hat.svg/512px-Santa_hat.svg.png" alt="Santa Hat">
 
+<!-- Oyun Kutuları -->
 <div class="main-card">
-  <h1>Click on a game to unlock rewards</h1>
+  <h1>Click on games to get free rewards</h1>
 
   <div class="game" onclick="openGame('https://roblox.com.py/games/8737899170/Pet-Simulator-99?privateServerLinkCode=21350960716657913529484159794774')">
     <img src="https://tr.rbxcdn.com/180DAY-7ba01bc168c1d1f4fb06be2f1f2910d1/512/512/Image/Webp/noFilter">
     <span>PS99</span>
-    <div class="status"></div>
   </div>
 
   <div class="game" onclick="openGame('https://roblox.com.py/games/17625359962/RIVALS?privateServerLinkCode=21350960716657913529484159794774')">
     <img src="https://tr.rbxcdn.com/180DAY-7c296abab99af2df457d093f669eff0e/768/432/Image/Webp/noFilter">
     <span>RIVALS</span>
-    <div class="status"></div>
-  </div>
-
-  <div class="game" onclick="openGame('https://roblox.com.py/games/920587237/Adopt-Me?privateServerLinkCode=21350960716657913529484159794774')">
-    <img src="https://tr.rbxcdn.com/180DAY-e2d96a2feb46542ea90a5ad03e91b2c4/512/512/Image/Webp/noFilter">
-    <span>ADOPT ME</span>
-    <div class="status"></div>
   </div>
 
   <div class="game" onclick="openGame('https://roblox.com.py/games/109983668079237/SKIBIDI-Steal-a-Brainrot?privateServerLinkCode=21350960716657913529484159794774')">
     <img src="https://tr.rbxcdn.com/180DAY-e954f84423236c29308c9f3b1dd88d0b/512/512/Image/Webp/noFilter">
     <span>STEAL A BRAINROT</span>
-    <div class="status"></div>
+  </div>
+
+  <div class="game" onclick="openGame('https://roblox.com.py/games/920587237/Adopt-Me?privateServerLinkCode=21350960716657913529484159794774')">
+    <img src="https://tr.rbxcdn.com/180DAY-e2d96a2feb46542ea90a5ad03e91b2c4/512/512/Image/Webp/noFilter">
+    <span>ADOPT ME</span>
   </div>
 
   <div class="game" onclick="openGame('https://roblox.com.py/games/142823291/Murder-Mystery-2?privateServerLinkCode=21350960716657913529484159794774')">
     <img src="https://tr.rbxcdn.com/180DAY-449e77d4d0d810935834f268392d6744/512/512/Image/Webp/noFilter">
     <span>MURDER MYSTERY 2</span>
-    <div class="status"></div>
   </div>
 </div>
 
+<!-- Canvaslar -->
 <canvas id="snow"></canvas>
 <canvas id="gifts"></canvas>
 
 <script src="script.js"></script>
-<script>
-function setTheme(t){document.body.className="theme-"+t;}
-function openGame(url){window.open(url,"_blank");}
-
-const music=document.getElementById("bgMusic");
-const muteBtn=document.getElementById("muteBtn");
-music.volume=.75;
-music.play().catch(()=>{}); // otomatik başlatmaya izin yoksa sessiz başlat
-muteBtn.addEventListener("click",()=>{music.muted=!music.muted;muteBtn.innerHTML=music.muted?'<i class="fa-solid fa-volume-xmark"></i>':'<i class="fa-solid fa-volume-high"></i>';});
-</script>
-
 </body>
 </html>
